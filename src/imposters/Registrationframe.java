@@ -4,12 +4,44 @@
  */
 package imposters;
 
+import static java.lang.String.valueOf;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
  */
 public class Registrationframe extends javax.swing.JFrame {
-
+    //databse work
+    void createUser(){
+            Database db = new Database();
+            db.dbcon();
+            String name = nameTextField.getText();
+            String email = emailTextField.getText();
+            String pwd = valueOf(passwordField.getPassword()) ;
+            String cpwd = valueOf(confirmPasswordField.getPassword());
+            String contact = contactNoTextField.getText();
+            if(pwd.contains(cpwd)){
+                String sql = "INSERT INTO users(name,email,contact,password) "+" VALUES('"+name+"','"+email+"','"+contact+"','"+
+                    pwd+"')";
+               
+                try{
+                  try{
+                   db.insertdata(sql);
+                }catch(Exception e){
+                    System.out.println("user is't created");
+                }
+                
+                 JOptionPane.showMessageDialog(this,"Account created plz go to Login");
+                 
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(this,"PLZ try again");
+                }
+            }else{
+                  JOptionPane.showMessageDialog(this,"Password does't Match");
+            }
+        
+     }
     /**
      * Creates new form Registrationframe
      */
@@ -74,18 +106,19 @@ public class Registrationframe extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("Password");
 
-        passwordField.setText("jPasswordField1");
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(63, 109, 51));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Confirm Password");
 
-        confirmPasswordField.setText("jPasswordField1");
-
         signUpButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         signUpButton.setForeground(new java.awt.Color(155, 54, 42));
         signUpButton.setText("sign up");
+        signUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signUpButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,6 +182,11 @@ public class Registrationframe extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
+        // TODO add your handling code here:
+        createUser();
+    }//GEN-LAST:event_signUpButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,7 +220,11 @@ public class Registrationframe extends javax.swing.JFrame {
                 new Registrationframe().setVisible(true);
             }
         });
+        // database work by ayt
+        
+        
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField confirmPasswordField;
