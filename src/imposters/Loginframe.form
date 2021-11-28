@@ -49,7 +49,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="loginButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="110" max="32767" attributes="0"/>
+                              <EmptySpace pref="435" max="32767" attributes="0"/>
                               <Component id="createAccountButton" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                           <Component id="emailTextField" max="32767" attributes="0"/>
@@ -84,7 +84,7 @@
                   <Component id="loginButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="createAccountButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="44" max="32767" attributes="0"/>
+              <EmptySpace pref="262" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
