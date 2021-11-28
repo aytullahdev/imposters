@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
 public class Registrationframe extends javax.swing.JFrame {
     //databse work
     void createUser(){
-            
+            Database db = new Database();
+            db.dbcon();
             String name = nameTextField.getText();
             String email = emailTextField.getText();
             String pwd = valueOf(passwordField.getPassword()) ;
@@ -23,9 +24,14 @@ public class Registrationframe extends javax.swing.JFrame {
             if(pwd.contains(cpwd)){
                 String sql = "INSERT INTO users(name,email,contact,password) "+" VALUES('"+name+"','"+email+"','"+contact+"','"+
                     pwd+"')";
-                
+               
                 try{
-                 
+                  try{
+                   db.insertdata(sql);
+                }catch(Exception e){
+                    System.out.println("user is't created");
+                }
+                
                  JOptionPane.showMessageDialog(this,"Account created plz go to Login");
                  
                 }catch(Exception e){
