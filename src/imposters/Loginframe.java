@@ -149,13 +149,15 @@ public class Loginframe extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Loginframe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Loginframe().setVisible(true);
             }
         });
+       
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
