@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="proj_3"/>
         <group>
-            <file>file:/E:/3rd/imposters/src/imposters/Viwerframe.java</file>
-            <file>file:/E:/3rd/imposters/src/imposters/Loginframe.java</file>
-            <file>file:/E:/3rd/imposters/src/imposters/productManage.java</file>
-            <file>file:/E:/3rd/imposters/src/imposters/Sellerframe.java</file>
-            <file>file:/E:/3rd/imposters/src/imposters/Registrationframe.java</file>
+            <file>file:/E:/3rd/imposters/imposters/src/imposters/productManage.java</file>
+            <file>file:/E:/3rd/imposters/imposters/src/imposters/Registrationframe.java</file>
+            <file>file:/E:/3rd/imposters/imposters/src/imposters/Viwerframe.java</file>
+            <file>file:/E:/3rd/imposters/imposters/src/imposters/Loginframe.java</file>
+            <file>file:/E:/3rd/imposters/imposters/src/imposters/Sellerframe.java</file>
         </group>
     </open-files>
 </project-private>
