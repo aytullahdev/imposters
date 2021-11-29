@@ -4,7 +4,13 @@
  */
 package imposters;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,6 +23,39 @@ public class productManage extends javax.swing.JFrame {
      */
     public productManage() {
         initComponents();
+        updateTable();
+    }
+    void updateTable(){
+            Connection con=null;
+            Statement smt=null;
+             ResultSet rs = null;
+             jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","NAME","PRICE","QUANTITY"}));
+             try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:database.db");
+            con.setAutoCommit(false);
+            String sql = "SELECT * FROM products";
+            smt = con.createStatement();
+            rs = smt.executeQuery(sql);
+            while(rs.next()){
+                String id = String.valueOf(rs.getString("id"));
+                String pname = String.valueOf(rs.getString("pname"));
+                String quan = String.valueOf(rs.getString("quantity"));
+                String price = String.valueOf(rs.getString("price"));
+                String tbData[]={id,pname,price,quan};
+                DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+                tblModel.addRow(tbData);
+            }
+            smt.close();
+            con.commit();
+            con.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.print("Database error plz check Database.java file");
+            
+            
+        }
+    
+    
     }
 
     /**
@@ -201,6 +240,7 @@ public class productManage extends javax.swing.JFrame {
               if(conf==0){
                   db.insertData(sql);
                   System.out.println("Data is updated");
+                  updateTable();
               }else{
                   System.out.println("Ok data is't updated");
               
@@ -241,6 +281,7 @@ public class productManage extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         addData();
+        updateTable();
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**
