@@ -160,15 +160,14 @@ public class Loginframe extends javax.swing.JFrame {
         db.rs = db.getData(sql);
         while(db.rs.next()){
             String emailFromUsersTable = db.rs.getString("email");
-            System.out.println(emailFromUsersTable);
+            //System.out.println(emailFromUsersTable);
             String passwordFromUsersTable = db.rs.getString("password");
             if(!email.equals(emailFromUsersTable)){
                 JOptionPane.showMessageDialog(this, "Please, enter your correct email.");
             }
             if(passwordFromUsersTable.equals(password)){
                 JOptionPane.showMessageDialog(this, "successfully logged in!!");
-                login = 1;
-                
+                login = 1;    
             }
             else{
                 JOptionPane.showMessageDialog(this, "Wrong password!\nTry again with correct password.");
