@@ -4,6 +4,8 @@
  */
 package imposters;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
@@ -181,8 +183,27 @@ public class productManage extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+            String prid = pid.getText();
+            String prname = pname.getText();
+            String prprice = pprice.getText();
+            String prcon = pquantity.getText();
           Database db = new Database();
           db.dbcon();
+          String sql = "UPDATE products SET pname='"+prname+"', price='"+prprice+"', quantity='"+prcon+"' WHERE id='"+prid+"';";
+          try{
+              
+              int conf = JOptionPane.showConfirmDialog(this, "Are you confirm to update the data");
+              if(conf==0){
+                  db.insertData(sql);
+                  System.out.println("Data is updated");
+              }else{
+                  System.out.println("Ok data is't updated");
+              
+              }
+            
+          }catch(Exception e){
+              System.out.println("Data isn't updated");
+          }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
