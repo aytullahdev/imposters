@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -30,6 +31,7 @@ public class productManage extends javax.swing.JFrame {
             Statement smt=null;
              ResultSet rs = null;
              jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","NAME","PRICE","QUANTITY"}));
+             
              try {
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:database.db");
@@ -114,6 +116,11 @@ public class productManage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel3.setText("ID");
@@ -139,6 +146,11 @@ public class productManage extends javax.swing.JFrame {
         });
 
         jButton3.setText("DELATE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -283,6 +295,41 @@ public class productManage extends javax.swing.JFrame {
         addData();
         updateTable();
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int index = jTable1.getSelectedRow();
+        TableModel model = jTable1.getModel();
+        pname.setText(model.getValueAt(index,1).toString());
+          pid.setText(model.getValueAt(index,0).toString());
+            pprice.setText(model.getValueAt(index,2).toString());
+              pquantity.setText(model.getValueAt(index,0).toString());
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String prid = pid.getText();
+           
+          Database db = new Database();
+          db.dbcon();
+          String sql = "DELETE FROM products  WHERE id='"+prid+"';";
+          try{
+              
+              int conf = JOptionPane.showConfirmDialog(this, "Are you confirm to Delete the data");
+              if(conf==0){
+                  db.insertData(sql);
+                  System.out.println("Data is Deleted");
+                  updateTable();
+              }else{
+                  System.out.println("Ok data is't deketed");
+              
+              }
+            
+          }catch(Exception e){
+              System.out.println("Error check line 329");
+          }
+         
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
