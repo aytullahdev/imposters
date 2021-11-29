@@ -4,6 +4,8 @@
  */
 package imposters;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
@@ -38,7 +40,7 @@ public class productManage extends javax.swing.JFrame {
         pprice = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         pquantity = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -83,7 +85,12 @@ public class productManage extends javax.swing.JFrame {
 
         jLabel6.setText("QUANTITY");
 
-        jButton1.setText("ADD");
+        addButton.setText("ADD");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("UPDATE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +137,7 @@ public class productManage extends javax.swing.JFrame {
                             .addComponent(pquantity)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(addButton)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
@@ -165,7 +172,7 @@ public class productManage extends javax.swing.JFrame {
                             .addComponent(pquantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(addButton)
                             .addComponent(jButton2)
                             .addComponent(jButton3))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -184,6 +191,38 @@ public class productManage extends javax.swing.JFrame {
           Database db = new Database();
           db.dbcon();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void addData(){
+        Database db = new Database();
+        db.dbcon();
+        String id = pid.getText();
+        String name = pname.getText();
+        String price = pprice.getText();
+        String quantity = pquantity.getText();
+        
+        if(id.equals("")){
+            JOptionPane.showMessageDialog(this, "please, insert product id.");
+        }
+        else if(name.equals("")){
+            JOptionPane.showMessageDialog(this, "please, insert product name.");
+        }
+        else if(price.equals("")){
+            JOptionPane.showMessageDialog(this, "please, insert product price.");
+        }
+        else if(quantity.equals("")){
+            JOptionPane.showMessageDialog(this, "please, insert product quantity.");
+        }
+        else{
+            String sql = "INSERT INTO products(id, pname, price, quantity) VALUES('"+id+"','"+name+"','"+price+"','"+quantity+"')";
+            db.insertData(sql);
+            JOptionPane.showMessageDialog(this, "Product added successfully!");
+        }
+        
+    }
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        addData();
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,7 +260,7 @@ public class productManage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton addButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
