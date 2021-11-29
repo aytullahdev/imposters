@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 public class Database {
         private Connection con;
         private Statement smt;
+        ResultSet rs = null;
         void dbcon(){
             try {
             Class.forName("org.sqlite.JDBC");
@@ -26,7 +27,7 @@ public class Database {
             
         }
        }
-       void insertdata(String sql){
+       void insertData(String sql){
            try{
                 smt = con.createStatement();
                 smt.executeUpdate(sql);
@@ -40,13 +41,12 @@ public class Database {
             
         
         }
-       ResultSet getdata(String sql){
-           ResultSet rs = null;
+       ResultSet getData(String sql){
            try{
                 con.setAutoCommit(false);
                 smt = con.createStatement();
                 rs = smt.executeQuery(sql);
-              
+                con.commit();
                
            }catch(SQLException e){
                System.out.println("Data is't inserted plz check");
