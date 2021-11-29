@@ -138,7 +138,7 @@ public class Loginframe extends javax.swing.JFrame {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(265, Short.MAX_VALUE))
@@ -160,15 +160,14 @@ public class Loginframe extends javax.swing.JFrame {
         db.rs = db.getData(sql);
         while(db.rs.next()){
             String emailFromUsersTable = db.rs.getString("email");
-            System.out.println(emailFromUsersTable);
+            //System.out.println(emailFromUsersTable);
             String passwordFromUsersTable = db.rs.getString("password");
             if(!email.equals(emailFromUsersTable)){
                 JOptionPane.showMessageDialog(this, "Please, enter your correct email.");
             }
             if(passwordFromUsersTable.equals(password)){
                 JOptionPane.showMessageDialog(this, "successfully logged in!!");
-                login = 1;
-                
+                login = 1;    
             }
             else{
                 JOptionPane.showMessageDialog(this, "Wrong password!\nTry again with correct password.");
