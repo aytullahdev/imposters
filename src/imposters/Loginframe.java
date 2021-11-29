@@ -4,6 +4,13 @@
  */
 package imposters;
 
+import static java.lang.String.valueOf;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author user
@@ -56,28 +63,35 @@ public class Loginframe extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 204, 51));
         jLabel5.setText("Password");
 
-        passwordField.setText("jPasswordField1");
-
         loginButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         loginButton.setForeground(new java.awt.Color(102, 77, 182));
         loginButton.setText("log in");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
 
         createAccountButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         createAccountButton.setForeground(new java.awt.Color(0, 148, 135));
         createAccountButton.setText("create a account");
+        createAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccountButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel2)
-                        .addGap(0, 780, Short.MAX_VALUE))
+                        .addGap(0, 637, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -86,13 +100,13 @@ public class Loginframe extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(loginButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 435, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
                                 .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(emailTextField)
                             .addComponent(passwordField))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(334, 334, 334)
+                .addGap(261, 261, 261)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -116,11 +130,51 @@ public class Loginframe extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logInData() throws SQLException{
+        String email = emailTextField.getText();
+        String password = valueOf(passwordField.getPassword());
+        
+        Database db = new Database();
+        db.dbcon();
+        
+        String sql = "SELECT email, password FROM users";
+        
+        db.rs = db.getData(sql);
+        while(db.rs.next()){
+            String emailFromUsersTable = db.rs.getString("email");
+            System.out.println(emailFromUsersTable);
+            String passwordFromUsersTable = db.rs.getString("password");
+            if(!email.equals(emailFromUsersTable)){
+                JOptionPane.showMessageDialog(this, "Please, enter your correct email.");
+            }
+            if(passwordFromUsersTable.equals(password)){
+                JOptionPane.showMessageDialog(this, "successfully logged in!!");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Wrong password!\nTry again with correct password.");
+            }
+        }
+        
+    }
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        try {
+            // TODO add your handling code here:
+            logInData();
+        } catch (SQLException ex) {
+            System.out.println("problem in logging in");
+        }
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
+        // TODO add your handling code here:
+        Registrationframe.main(new String[0]);
+    }//GEN-LAST:event_createAccountButtonActionPerformed
 
     /**
      * @param args the command line arguments

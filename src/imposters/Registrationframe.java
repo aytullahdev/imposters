@@ -27,7 +27,7 @@ public class Registrationframe extends javax.swing.JFrame {
                
                 try{
                   try{
-                   db.insertdata(sql);
+                   db.insertData(sql);
                 }catch(Exception e){
                     System.out.println("user is't created");
                 }
