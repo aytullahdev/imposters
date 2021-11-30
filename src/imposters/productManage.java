@@ -9,6 +9,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -288,6 +290,11 @@ public class productManage extends javax.swing.JFrame {
             db.insertData(sql);
             JOptionPane.showMessageDialog(this, "Product added successfully!");
         }
+        try {
+            db.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(productManage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
@@ -328,7 +335,11 @@ public class productManage extends javax.swing.JFrame {
           }catch(Exception e){
               System.out.println("Error check line 329");
           }
-         
+        try {
+            db.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(productManage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

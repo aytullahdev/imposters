@@ -51,11 +51,19 @@ public class Database {
            }catch(SQLException e){
                System.out.println("Data is't inserted plz check");
            }
-           
-           
-       
              return rs;
        }
     
+       public void close() throws SQLException{
+           if(con != null){
+               con.close();
+           }
+           if(smt != null){
+               smt.close();
+           }
+           if(rs != null){
+               rs.close();
+           }
+       }
     
 }

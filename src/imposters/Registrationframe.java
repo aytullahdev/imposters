@@ -5,6 +5,9 @@
 package imposters;
 
 import static java.lang.String.valueOf;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +48,11 @@ public class Registrationframe extends javax.swing.JFrame {
             }
                 
             }
+        try {
+            db.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Registrationframe.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
      }
     /**
