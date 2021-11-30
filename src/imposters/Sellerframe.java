@@ -4,6 +4,13 @@
  */
 package imposters;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author user
@@ -15,8 +22,42 @@ public class Sellerframe extends javax.swing.JFrame {
      */
     public Sellerframe() {
         initComponents();
+        updateTable();
     }
-
+    void updateTable(){
+            Connection con=null;
+            Statement smt=null;
+             ResultSet rs = null;
+             jTable1.setModel(new DefaultTableModel(null,new String[]{"CUSTOMER ID","PRODUCT NAME","PRODUCT ID","QUANTITY","PRICE"}));
+             
+             try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:database.db");
+            con.setAutoCommit(false);
+            String sql = "SELECT * FROM orderlist";
+            smt = con.createStatement();
+            rs = smt.executeQuery(sql);
+            while(rs.next()){
+                String cid = String.valueOf(rs.getString("cid"));
+                String pid = String.valueOf(rs.getString("pid"));
+                String pname = String.valueOf(rs.getString("pname"));
+                String quan = String.valueOf(rs.getString("quantity"));
+                String price = String.valueOf(rs.getString("price"));
+                String tbData[]={cid,pname,pid,quan,price};
+                DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+                tblModel.addRow(tbData);
+            }
+            smt.close();
+            con.commit();
+            con.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.print("Database error plz check Database.java file");
+            
+            
+        }
+    
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,14 +91,14 @@ public class Sellerframe extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CUSTOMER ID", "PRODUCT NAME", "PRODUCT ID", "QUANTITY"
+                "CUSTOMER ID", "PRODUCT NAME", "PRODUCT ID", "QUANTITY", "PRICE"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
