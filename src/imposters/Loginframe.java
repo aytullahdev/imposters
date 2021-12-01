@@ -172,7 +172,7 @@ public class Loginframe extends javax.swing.JFrame {
             }
         }
         if(login==1){
-            String spwd = valueOf(passwordField.getPassword());
+            String spwd = valueOf(passwordField.getParent());
            Preferences pref = Preferences.userNodeForPackage(Loginframe.class);
            pref.put("susername", emailTextField.getText());
            pref.put("spwd",spwd);
