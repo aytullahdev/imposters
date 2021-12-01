@@ -207,9 +207,10 @@ public class CustomerFrame extends javax.swing.JFrame {
         String orderedProductID = productIDTextField.getText();
         int orderedProductQuantity = Integer.parseInt(productQuantityTextField.getText());
         prodPrice *= orderedProductQuantity;
-        String sql = "INSERT INTO orderlist(cid, pid, pname, quantity, price) VALUES('"+cemailid+"','"+orderedProductID+"', '"+orderedProductName+"', '"+orderedProductQuantity+"', '"+prodPrice+"')";
+        String sql = "INSERT INTO orderlist(cid, pid, pname, quantity, price) VALUES('"+cemailid+"','"+orderedProductID+"', '"+orderedProductName+"', "+orderedProductQuantity+", "+prodPrice+")";
         db.insertData(sql);
         db.close();
+        
     }
     private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtonActionPerformed
         try {
