@@ -107,6 +107,8 @@ public class CustomerFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        itemTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        itemTable.setShowGrid(false);
         jScrollPane2.setViewportView(itemTable);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -169,14 +171,13 @@ public class CustomerFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
      
-    private void orderTable() throws SQLException{
-        
-    }
+    
     private void displayItemTable() throws SQLException{
         Database db = new Database();
         db.dbcon();
         
         itemTable.setModel(new DefaultTableModel(null,new String[]{"ID","PRODUCT NAME","PRICE","QUANTITY"}));
+        itemTable.setDefaultEditor(Object.class, null);//disable editing in table
         String sql = "SELECT * FROM products";
         db.rs = db.getData(sql);
         while(db.rs.next()){
