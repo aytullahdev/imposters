@@ -7,6 +7,8 @@ package imposters;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +27,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(CustomerFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        displaysavedata();
     }
 
     /**
@@ -168,7 +171,17 @@ public class CustomerFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    void displaysavedata(){
+         Preferences pref = Preferences.userNodeForPackage(CustomerFrame.class);
+         String semail = pref.get("susername","null");
+         String spwd = pref.get("spwd","null");
+         if(semail.contains("null")||spwd.contains("null")){
+             JOptionPane.showMessageDialog(this,"You are not loged in plz try again");
+             Loginframe lf = new Loginframe();
+             this.setVisible(false);
+             lf.setVisible(true);
+         }
+    }
     private void displayItemTable() throws SQLException{
         Database db = new Database();
         db.dbcon();
