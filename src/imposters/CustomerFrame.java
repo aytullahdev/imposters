@@ -22,13 +22,14 @@ public class CustomerFrame extends javax.swing.JFrame {
      * Creates new form CustomerFrame
      */
     public CustomerFrame() {
+        displaySavedData();
         initComponents();
         try {
             displayItemTable();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        displaysavedata();
+        
     }
 
     /**
@@ -175,15 +176,16 @@ public class CustomerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
      
-    void displaysavedata(){
+    void displaySavedData(){
          Preferences pref = Preferences.userNodeForPackage(CustomerFrame.class);
          String semail = pref.get("susername","null");
          String spwd = pref.get("spwd","null");
          if(semail.contains("null")||spwd.contains("null")){
              JOptionPane.showMessageDialog(this,"You are not loged in plz try again");
+             
              Loginframe lf = new Loginframe();
-             this.setVisible(false);
              lf.setVisible(true);
+             setVisible(false);
          }
     }
 
