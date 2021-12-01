@@ -45,6 +45,7 @@ public class Loginframe extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         createAccountButton = new javax.swing.JButton();
+        mainFrameButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,16 +83,31 @@ public class Loginframe extends javax.swing.JFrame {
             }
         });
 
+        mainFrameButton.setText("GO TO MAIN FRAME");
+        mainFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainFrameButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(790, Short.MAX_VALUE))
+                        .addGap(300, 300, 300)
+                        .addComponent(loginButton)
+                        .addGap(86, 86, 86)
+                        .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(331, 331, 331)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -106,18 +122,14 @@ public class Loginframe extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
                             .addComponent(passwordField))
-                        .addGap(92, 92, 92))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(92, 92, 92))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(loginButton)
-                        .addGap(86, 86, 86)
-                        .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(331, 331, 331)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(192, 192, 192)
+                                .addComponent(jLabel2))
+                            .addComponent(mainFrameButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +151,9 @@ public class Loginframe extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                .addComponent(mainFrameButton)
+                .addContainerGap())
         );
 
         pack();
@@ -206,6 +220,13 @@ public class Loginframe extends javax.swing.JFrame {
         regf.setVisible(true);
     }//GEN-LAST:event_createAccountButtonActionPerformed
 
+    private void mainFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainFrameButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainFrame mf = new MainFrame();
+        mf.setVisible(true);
+    }//GEN-LAST:event_mainFrameButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -252,6 +273,7 @@ public class Loginframe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton loginButton;
+    private javax.swing.JButton mainFrameButton;
     private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
 }
