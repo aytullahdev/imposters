@@ -8,6 +8,7 @@ import static java.lang.String.valueOf;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
 
 
@@ -171,7 +172,13 @@ public class Loginframe extends javax.swing.JFrame {
             }
         }
         if(login==1){
-            //code here
+            String spwd = valueOf(passwordField.getParent());
+           Preferences pref = Preferences.userNodeForPackage(Loginframe.class);
+           pref.put("susername", emailTextField.getText());
+           pref.put("spwd",spwd);
+           this.setVisible(false);
+           CustomerFrame cf = new CustomerFrame();
+           cf.setVisible(true);
             
         }
         db.close();
