@@ -172,9 +172,13 @@ public class Loginframe extends javax.swing.JFrame {
             }
         }
         if(login==1){
+            String spwd = valueOf(passwordField.getPassword());
            Preferences pref = Preferences.userNodeForPackage(Loginframe.class);
            pref.put("susername", emailTextField.getText());
-           pref.put("spwd",valueOf(passwordField.getParent()));
+           pref.put("spwd",spwd);
+           this.setVisible(false);
+           CustomerFrame cf = new CustomerFrame();
+           cf.setVisible(true);
             
         }
         db.close();

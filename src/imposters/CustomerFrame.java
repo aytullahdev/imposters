@@ -22,8 +22,13 @@ public class CustomerFrame extends javax.swing.JFrame {
      * Creates new form CustomerFrame
      */
     public CustomerFrame() {
+<<<<<<< HEAD
         displaySavedData();
+=======
+        
+>>>>>>> c225922e084565c7303f618e21f2d8aa53dd8d59
         initComponents();
+        displaysavedata();
         try {
             displayItemTable();
         } catch (SQLException ex) {
@@ -31,7 +36,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         }
         
     }
-
+    String cemailid;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +55,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         itemTable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        welcomeLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +128,9 @@ public class CustomerFrame extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("ORDER");
 
+        welcomeLable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        welcomeLable.setText("Welcome");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,14 +156,18 @@ public class CustomerFrame extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(welcomeLable, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(297, 297, 297))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(welcomeLable))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -175,17 +188,31 @@ public class CustomerFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
      
     void displaySavedData(){
+=======
+    void displaysavedata(){
+>>>>>>> c225922e084565c7303f618e21f2d8aa53dd8d59
          Preferences pref = Preferences.userNodeForPackage(CustomerFrame.class);
          String semail = pref.get("susername","null");
          String spwd = pref.get("spwd","null");
-         if(semail.contains("null")||spwd.contains("null")){
+         if(semail.equals("null") || spwd.equals("null")){
              JOptionPane.showMessageDialog(this,"You are not loged in plz try again");
              
              Loginframe lf = new Loginframe();
              lf.setVisible(true);
+<<<<<<< HEAD
              setVisible(false);
+=======
+             System.out.println(semail);
+             System.out.println(spwd);
+         }else{
+            
+            cemailid = semail;
+            System.out.println(cemailid);
+            welcomeLable.setText("WELCOME "+semail);
+>>>>>>> c225922e084565c7303f618e21f2d8aa53dd8d59
          }
     }
 
@@ -254,5 +281,6 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable orderTable;
+    private javax.swing.JLabel welcomeLable;
     // End of variables declaration//GEN-END:variables
 }
