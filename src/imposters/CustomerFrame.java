@@ -21,9 +21,18 @@ public class CustomerFrame extends javax.swing.JFrame {
     /**
      * Creates new form CustomerFrame
      */
+    String cemailid,cname,ccontact;
+    int prodPrice;
+    
     public CustomerFrame() {
 
+        
         initComponents();
+        try {
+            getuserInformation();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         displaysavedata();
         try {
             displayItemTable();
@@ -31,9 +40,9 @@ public class CustomerFrame extends javax.swing.JFrame {
             Logger.getLogger(CustomerFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
     }
-    String cemailid;
-    int prodPrice;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -211,7 +220,18 @@ public class CustomerFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    private void getuserInformation() throws SQLException{
+        Database db = new Database();
+        db.dbcon();
+        String sql = "SELECT * FROM users WHERE email='"+cemailid+"'";
+         db.rs = db.getData(sql);
+         while(db.rs.next()){
+             cname = db.rs.getString("name");
+             ccontact = db.rs.getString("contact");
+            
+        }
+         db.close();
+    }
     private void orderData() throws SQLException{
         Database db = new Database();
         db.dbcon();
@@ -223,6 +243,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         String sql = "INSERT INTO orderlist(cid, pid, pname, quantity, price) VALUES('"+cemailid+"','"+orderedProductID+"', '"+orderedProductName+"', "+orderedProductQuantity+", "+prodPrice+")";
         db.insertData(sql);
         db.close();
+        
         
     }
     private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtonActionPerformed
@@ -277,7 +298,7 @@ public class CustomerFrame extends javax.swing.JFrame {
             
             cemailid = semail;
             System.out.println(cemailid);
-            welcomeLable.setText("WELCOME "+semail);
+            welcomeLable.setText("WELCOME "+ccontact);
 
          }
     }
