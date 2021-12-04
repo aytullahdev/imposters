@@ -28,12 +28,13 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         
         initComponents();
+        displaysavedata();
         try {
             getuserInformation();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        displaysavedata();
+       
         try {
             displayItemTable();
         } catch (SQLException ex) {
@@ -223,13 +224,15 @@ public class CustomerFrame extends javax.swing.JFrame {
     private void getuserInformation() throws SQLException{
         Database db = new Database();
         db.dbcon();
-        String sql = "SELECT * FROM users WHERE email='"+cemailid+"'";
+        String sql = "SELECT email, password,name,contact FROM users WHERE email='"+cemailid+"';";
+        
          db.rs = db.getData(sql);
          while(db.rs.next()){
              cname = db.rs.getString("name");
              ccontact = db.rs.getString("contact");
             
         }
+        welcomeLable.setText("WELCOME "+cname);
          db.close();
     }
     private void orderData() throws SQLException{
@@ -297,8 +300,8 @@ public class CustomerFrame extends javax.swing.JFrame {
          }else{
             
             cemailid = semail;
-            System.out.println(cemailid);
-            welcomeLable.setText("WELCOME "+ccontact);
+            
+           
 
          }
     }
