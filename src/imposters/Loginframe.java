@@ -202,7 +202,7 @@ public class Loginframe extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             if(!emailTextField.getText().equals("")){
-                
+                //opu
                 logInData();
             }else{
                 JOptionPane.showMessageDialog(this, "Enter a valid email");
